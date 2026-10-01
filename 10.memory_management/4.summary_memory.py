@@ -36,7 +36,7 @@ agent = create_agent(
 config = {"configurable": {"thread_id": "long-chat"}}
 
 conversation = [
-    "I'm planning a trip to Kerala in December.",
+    "I'm planning a trip to Kerala in December. ",
     "Budget is ₹40,000 for 5 days.",  # will end up inside the summary
     "I like backwaters and hate crowded beaches.",
     "I'm travelling with two friends.",
@@ -45,7 +45,10 @@ conversation = [
 ]
 
 for msg in conversation:
-    out = agent.invoke({"messages": [{"role": "user", "content": msg}]}, config)
+    out = agent.invoke(
+        {"messages": [{"role": "user", "content": msg + " . Give resposne in 1 line"}]},
+        config,
+    )
     print(f"\nUser : {msg}")
     print(f"Agent: {out['messages'][-1].content[:300]}")
 
@@ -54,4 +57,4 @@ print("\n" + "=" * 60)
 print("Messages currently stored in the thread:")
 for m in agent.get_state(config).values["messages"]:
     text = str(m.content).replace("\n", " ")
-    print(f"  {m.type:>5} | {text[:160]}")
+    print(f"  {m.type:>5} | {text}")

@@ -60,7 +60,10 @@ ctx = Context(user_id="Jafer")
 out = agent.invoke(
     {
         "messages": [
-            {"role": "user", "content": "I'm vegetarian and prefer Tamil cuisine."}
+            {
+                "role": "user",
+                "content": "I like to play chess, badminton, cricket, football. These are my hobbies.",
+            }
         ]
     },
     {"configurable": {"thread_id": "session-1"}},
@@ -75,7 +78,7 @@ for item in store.search(("memories", "Jafer")):
 
 # Session 2: a brand-new thread, but the memory persists
 out = agent.invoke(
-    {"messages": [{"role": "user", "content": "Suggest a dinner for me."}]},
+    {"messages": [{"role": "user", "content": "Suggest a game to play."}]},
     {"configurable": {"thread_id": "session-2"}},
     context=ctx,
 )
@@ -83,7 +86,7 @@ print("\nSession 2 (same user):", out["messages"][-1].content)
 
 # A different user_id -> different namespace -> no access to Jafer's memories
 out = agent.invoke(
-    {"messages": [{"role": "user", "content": "Suggest a dinner for me."}]},
+    {"messages": [{"role": "user", "content": "Suggest a game to play. "}]},
     {"configurable": {"thread_id": "session-3"}},
     context=Context(user_id="priya"),
 )
