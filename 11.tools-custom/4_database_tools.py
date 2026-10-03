@@ -7,6 +7,7 @@ Safety layers (IMPORTANT for the session):
   2. SELECT-only check        (tool refuses anything else)
   3. Row limit                (agent can't dump a huge table into the context)
 """
+
 import re
 import sqlite3
 from pathlib import Path

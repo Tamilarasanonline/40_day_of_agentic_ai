@@ -7,6 +7,7 @@ Golden rules for API tools:
   - catch errors and return a readable message (never crash the agent)
   - return SMALL, clean data (not the whole JSON blob)
 """
+
 import requests
 from langchain.agents import create_agent
 from langchain.tools import tool
@@ -69,7 +70,11 @@ agent = create_agent(
 
 if __name__ == "__main__":
     result = agent.invoke(
-        {"messages": [{"role": "user", "content": "How is the weather in Chennai right now?"}]}
+        {
+            "messages": [
+                {"role": "user", "content": "How is the weather in Gampole right now?"}
+            ]
+        }
     )
     for m in result["messages"]:
         m.pretty_print()
